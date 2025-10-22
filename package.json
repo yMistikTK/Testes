@@ -1,0 +1,9 @@
+﻿{
+  "name": "testes",
+  "private": true,
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "dev": "npm run dev -w frontend",
+    "server": "npm run dev -w backend"
+  }
+}

@@ -1,0 +1,410 @@
+/* ======= Paleta e reset ======= */
+:root{
+  --red: #9c0f17;          /* faixa superior e lado esquerdo */
+  --red-dark: #7e0c12;
+  --panel: #404d57;        /* lado direito */
+  --bg: #eef0f3;           /* fundo do site (por baixo do pattern) */
+  --text: #1c1f24;
+  --muted: #a33b41;        /* link "Esqueci a Senha" */
+  --white: #ffffff;
+  --shadow: 0 10px 25px rgba(0,0,0,.25);
+  --radius-lg: 18px;
+}
+
+/* Borda da pagina */
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0;
+  font-family: "Segoe UI", system-ui, -apple-system, Arial, sans-serif;
+  color:var(--text);
+  background: var(--bg) url("/images/bg-pattern.png") center/cover fixed no-repeat;
+}
+
+/* ======= Top bar ======= */
+
+/* se tirar quebra a pagina */
+.topbar{
+  height:56px;
+  background: var(--red);
+  color:#fff;
+  display:grid;
+  grid-template-columns: 160px 1fr 56px;
+  align-items:center;
+  padding:0 12px;
+}
+
+/* se tirar quebra a pagina */
+.topbar-title{
+  text-align:center;
+  letter-spacing:.15em;
+  font-weight:700;
+}
+/* se tirar quebra a pagina */
+.logo-top-left{ height:30px; object-fit:contain }
+.logo-top-right{ height:34px; justify-self:end; object-fit:contain }
+
+/* Painel central vermelho (Deixa sombra) */
+.left-pane{
+  background:var(--red);
+  color:#fff;
+  border-top-left-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-lg);
+  padding:28px 24px 32px;
+  box-shadow: var(--shadow);
+  position:relative;
+}
+
+.btn-outline:active{ transform: translateY(1px) }
+
+/* Lado direito (cinza azulado) */
+.right-pane{
+  background:var(--panel);
+  color:#e9eef2;
+  border-top-right-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-lg);
+  padding:46px 34px;
+  box-shadow: var(--shadow);
+}
+
+/* mantém a o login centralizado  */
+.form{
+  width:min(420px, 90%);
+  margin: 10px auto 0;
+  display:grid;
+  gap:18px;
+}
+
+/* Inputs em "pílula" com ícone */
+.pill-input{
+  display:grid;
+  grid-template-columns: 44px 1fr;
+  align-items:center;
+  background:#f2f5f7;
+  border-radius: 28px;
+  box-shadow: 0 6px 0 rgba(0,0,0,.35);
+  overflow:hidden;
+}
+
+/* Ajuste fino dos icones de usuario e senha */
+.pill-input .icon{
+  height:44px; width:44px; display:grid; place-items:center;
+}
+
+/* Mantém Icones de Usuario e Senha */
+.pill-input .icon img{ width:18px; height:18px; object-fit:contain; opacity:.9 }
+.pill-input input{
+  border:0; outline:0; background:#f2f5f7; height:44px; padding:0 14px;
+  font-size:16px; color:#1a1d22;
+}
+
+/* Ações */
+.actions{
+  margin-top:6px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  justify-content:flex-end;
+}
+
+/* ======= Responsivo ======= */
+@media (max-width: 980px){
+  .login-shell{ grid-template-columns:1fr; }
+  .left-pane{
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+  .right-pane{
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  }
+}
+
+/* Alinha o Copyright com o centro */
+.copy {
+  text-align: center;
+  flex: 1;
+}
+
+/* ===== Centralizar o painel no meio da tela (MATEM O RODAPÉ NO LUGAR) ===== */
+.login-bg {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: url('/images/Background.png') center/cover no-repeat;
+}
+
+
+
+/* O painel ocupa o centro da tela */
+.login-shell {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; /* centraliza vertical e horizontal */
+  gap: 0;
+  padding: 40px 0;
+}
+
+/* Ajusta o tamnho do painel cinza */
+.left-pane, .right-pane {
+  height: 600px;
+  padding: 40px;
+}
+/* Painel central vermelho */
+.left-pane {
+  background: var(--red);
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+}
+/* Painel central cinza */
+.right-pane {
+  background: var(--panel);
+  width: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 18px;
+  border-bottom-right-radius: 18px;
+}
+
+
+
+/* Ajustar formulário de login */
+.form {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+
+
+/* Botão Login centralizado */
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+
+.btn-solid {
+  padding: 10px 53px;
+  border-radius: 25px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+
+/* ===== painel vermelho vira container de posicionamento ===== */
+.left-pane.left-free {
+  position: relative;
+  overflow: visible;           /* permite sombra/elementos passarem */
+  min-height: 560px;           /* ajuste global da altura do painel */
+}
+
+/* ===== variáveis para controlar as posições (em % do painel) ===== */
+:root{
+  /* LOGO */
+  --left-logo-top: 18%;
+  --left-logo-left: 50%;
+  --left-logo-scale: 1;
+
+  /* CARD DE TEXTO */
+  --left-card-top: 40%;
+  --left-card-left: 50%;
+  --left-card-width: 320px;
+
+  /* BOTÃO */
+  --left-cta-top: 62%;
+  --left-cta-left: 50%;
+  --left-cta-width: 320px;
+}
+
+/* ===== elementos livres ===== */
+.left-free .left-logo,
+.left-free .left-card,
+.left-free .left-cta {
+  position: absolute;
+  transform: translate(-50%, -50%); /* centraliza pela âncora */
+  z-index: 2;
+}
+
+/* LOGO */
+.left-free .left-logo{
+  top: var(--left-logo-top);
+  left: var(--left-logo-left);
+  width: calc(72px * var(--left-logo-scale));
+  height: auto;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.25));
+}
+
+/* CARD DE TEXTO */
+.left-free .left-card{
+  top: var(--left-card-top);
+  left: var(--left-card-left);
+  width: var(--left-card-width);
+  background: #fff;
+  color: #222;
+  border-radius: 12px;
+  padding: 18px 22px;
+  line-height: 1.5;
+  box-shadow: 0 8px 22px rgba(0,0,0,.18);
+}
+
+/* BOTÃO */
+.left-free .left-cta{
+  top: var(--left-cta-top);
+  left: var(--left-cta-left);
+  width: var(--left-cta-width);
+  background: #fff;
+  color: var(--red);
+  border: none;
+  border-radius: 26px;
+  padding: 12px 22px;
+  font-weight: 700;
+  box-shadow: 0 6px 0 rgba(0,0,0,.3);
+  cursor: pointer;
+}
+
+/* opcional: limite para não “vazar” muito no mobile */
+@media (max-width: 980px){
+  :root{
+    --left-logo-left: 50%;
+    --left-card-left: 50%;
+    --left-cta-left: 50%;
+  }
+}
+
+.forgot {
+  color: var(--muted);
+  text-decoration: underline; /* 👈 deixa sublinhado */
+  text-decoration-thickness: 2px; /* espessura da linha */
+  text-underline-offset: 3px; /* espaço entre texto e linha */
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.forgot:hover {
+  color: #b01923; /* muda o tom no hover, opcional */
+}
+
+.logo-fatec-wrap {
+  background: #111;
+  border-radius: 0 30px 30px 0;
+  padding: 6px 20px 6px 14px;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.35);
+}
+
+.logo-fatec-wrap img {
+  display: block;
+  margin: 0 auto;          /* centraliza horizontalmente */
+  margin-top: -10px;        /* ajuste vertical — aumente ou reduza conforme o visual */
+  width: 120px;            /* tamanho do logo — aumente se quiser maior */
+  height: auto;            /* mantém proporção */
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,0.4)); /* sombra leve para destacar */
+  transition: transform 0.2s ease;
+}
+
+.logo-fatec-wrap {
+  background: #101214;         /* cor de fundo preto */
+  border-radius: 0 28px 28px 0;/* canto direito arredondado */
+  height: 56px;                /* altura do bloco */
+  width: auto;                 /* você pode trocar por um valor fixo */
+  padding: 6px 18px 6px 12px;  /* espaço interno */
+  display: flex;
+  align-items: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,.35);
+  margin-left: -15px;
+
+}
+
+.logo-cps {
+  height: 90px;         /* 👈 Aumentado (de 26px para 46px) */
+  width: auto;
+  object-fit: contain;
+  margin-left: auto;
+  opacity: 0.95;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.3));
+}
+.bottombar{
+  height: var(--footer-h);
+  background: var(--panel);
+  border-top: 10px solid var(--red);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 36px;
+  color: #cfd6dc;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  box-shadow: inset 0 8px 0 rgba(0,0,0,0.15);
+  flex-shrink: 0;
+}
+
+@media (max-height: 768px){
+  :root{ --pane-min-h: 500px; }
+}
+
+/*Botão de login, interativo*/
+
+.btn-solid {
+  padding: 10px 53px;
+  border-radius: 25px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: var(--white);
+  color: var(--panel);
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover (quando passa o mouse) */
+.btn-solid:hover {
+  background: var(--red);
+  color: var(--white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 10px rgba(0, 0, 0, 0.4);
+}
+
+/* Active (quando clica) */
+.btn-solid:active {
+  transform: translateY(1px);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.25);
+}
+
+/* Botão Cadastrar interativo */
+.left-free .left-cta{
+  transform: translate(-50%, -50%);  /* fixo */
+  transition: box-shadow .18s ease, background .18s ease, color .18s ease, filter .18s ease;
+}
+.left-free .left-cta:hover{
+  box-shadow: 0 8px 10px rgba(0,0,0,.4);
+  background: var(--red);
+  color: var(--white);
+  filter: brightness(.98);
+}
+.left-free .left-cta:active{
+  box-shadow: 0 3px 5px rgba(0,0,0,.25);
+  filter: none;
+}
+
+
+
+
+
+
+
+
+
+
