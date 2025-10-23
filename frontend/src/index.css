@@ -399,6 +399,63 @@ body{
   filter: none;
 }
 
+.pill-input {
+  display: grid;
+  grid-template-columns: 44px 1fr;
+  align-items: center;
+  background: #f2f5f7;
+  border-radius: 28px;
+  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  position: relative;
+}
+
+/* ativa terceira coluna para o olho */
+/* o label precisa ser contexto de posicionamento */
+.pill-input {
+  position: relative;           /* já deve existir; mantenha */
+  display: grid;
+  grid-template-columns: 44px 1fr; /* mantém só DUAS colunas */
+  align-items: center;
+  background: #f2f5f7;
+  border-radius: 28px;
+  box-shadow: 0 6px 0 rgba(0,0,0,.35);
+  overflow: hidden;
+}
+
+/* botão do olho ancorado no canto direito, sem mudar o grid */
+.pill-input .reveal {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: none;
+  background: transparent;
+  color: #333;
+  cursor: pointer;
+  z-index: 1;
+}
+.pill-input .reveal:hover { opacity: 0.85; }
+
+
+.pill-input .reveal:hover {
+  opacity: 0.8;
+}
+
+/* aviso do CapsLock */
+.caps-hint {
+  font-size: 13px;
+  color: #ffffff;
+  margin: 6px 8px 0 2px;
+  transition: opacity 0.15s ease;
+}
+
+
+
+
 
 
 

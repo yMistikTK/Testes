@@ -1,21 +1,96 @@
+import { useState } from 'react';
+console.log("Arquivo App.jsx carregado da pasta correta!");
+
+/* Campo de senha com “mostrar/ocultar” e aviso de Caps Lock (corrigido) */
+function PasswordField() {
+  const [show, setShow] = useState(false);
+  const [capsOn, setCapsOn] = useState(false);
+
+  const handleKeyState = (e) => {
+    const caps = e.getModifierState && e.getModifierState("CapsLock");
+    setCapsOn(!!caps);
+  };
+
+  return (
+    <>
+      {/* adiciona has-reveal pra habilitar 3ª coluna */}
+      <label className="pill-input has-reveal">
+        <span className="icon">
+          <img src="/images/IconeCadeado.png" alt="" />
+        </span>
+
+        <input
+          type={show ? "text" : "password"}
+          placeholder="Senha"
+          autoComplete="current-password"
+          required
+          onKeyDown={handleKeyState}
+          onKeyUp={handleKeyState}
+          onBlur={() => setCapsOn(false)}
+        />
+
+        {/* botão do olho no canto direito */}
+        <button
+          type="button"
+          className="reveal"
+          aria-label={show ? "Ocultar senha" : "Mostrar senha"}
+          onClick={() => setShow((v) => !v)}
+        >
+          {show ? (
+            /* olho cortado */
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path d="M3 3l18 18" stroke="currentColor" strokeWidth="2" />
+              <path
+                d="M10.58 10.58A3 3 0 0012 15a3 3 0 002.42-4.42M9.88 5.1A10.94 10.94 0 0112 5c5 0 9 4 10 7-.29.81-.78 1.76-1.49 2.66m-3.02 2.49A10.94 10.94 0 0112 19c-5 0-9-4-10-7 .53-1.48 1.57-3.02 3.17-4.42"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+            </svg>
+          ) : (
+            /* olho normal */
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+              <circle
+                cx="12"
+                cy="12"
+                r="3"
+                stroke="currentColor"
+                strokeWidth="2"
+              />
+            </svg>
+          )}
+        </button>
+      </label>
+
+      {/* só mostra se estiver realmente ativado */}
+      {capsOn && <div className="caps-hint">Caps Lock ativado</div>}
+    </>
+  );
+}
+
+
+
 export default function App() {
   return (
     <div className="login-bg">
       {/* Top bar */}
-    <div className="topbar">
-  {/* Novo bloco Fatec estilizado */}
-  <div className="logo-fatec-wrap">
-    <img src="/images/LogoFatecZonaLeste.png" alt="Fatec Zona Leste" />
-  </div>
+      <div className="topbar">
+        {/* Novo bloco Fatec estilizado */}
+        <div className="logo-fatec-wrap">
+          <img src="/images/LogoFatecZonaLeste.png" alt="Fatec Zona Leste" />
+        </div>
 
-  <div className="topbar-title">SISTEMA GERENCIADOR DE P.I</div>
+        <div className="topbar-title">SISTEMA GERENCIADOR DE P.I</div>
 
-  <img className="logo-top-right" src="/images/LogoSGPI.png" alt="SGPI" />
-</div>
+        <img className="logo-top-right" src="/images/LogoSGPI.png" alt="SGPI" />
+      </div>
 
       {/* Card principal dividido em 2 colunas */}
       <main className="login-shell">
-        
         {/* Lado esquerdo (vermelho) — versão livre */}
         <section className="left-pane left-free">
           {/* LOGO independente */}
@@ -36,7 +111,7 @@ export default function App() {
 
         {/* Lado direito (cinza azulado) */}
         <section className="right-pane">
-          <form className="form">
+          <form className="form" onSubmit={(e)=>e.preventDefault()}>
             <label className="pill-input">
               <span className="icon">
                 <img src="/images/IconeUsuario.png" alt="" />
@@ -49,17 +124,8 @@ export default function App() {
               />
             </label>
 
-            <label className="pill-input">
-              <span className="icon">
-                <img src="/images/IconeCadeado.png" alt="" />
-              </span>
-              <input
-                type="password"
-                placeholder="Senha"
-                autoComplete="current-password"
-                required
-              />
-            </label>
+            {/* Campo de senha com mostrar/ocultar + Caps Lock */}
+            <PasswordField />
 
             <div className="actions">
               <a href="#" className="forgot">Esqueci a Senha</a>
